@@ -1,0 +1,174 @@
+{
+	"info": {
+		"_postman_id": "93e8d4f5-d92d-4a9e-aa02-c97162e49c1f",
+		"name": "Ticketing Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34952750"
+	},
+	"item": [
+		{
+			"name": "Create Ticket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"pm.environment.set(\"ticketId\", response.ticketId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"Marko Z\",\r\n    \"subject\": \"Payment Issue\",\r\n    \"description\": \"I was charged twice for the same order\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/tickets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tickets"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/v1/tickets \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\"field1\":\"value1\",\"field2\":\"value2\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Tickets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/tickets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tickets"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "OPEN",
+							"disabled": true
+						},
+						{
+							"key": "userId",
+							"value": "Marko Z",
+							"disabled": true
+						},
+						{
+							"key": "assigneeId",
+							"value": "someAssigneeId",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://localhost:8080/api/v1/tickets?status=someStatus&userId=someUserId&assigneeId=someAssigneeId\""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Ticket Status",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"IN_PROGRESS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/tickets/{{ticketId}}/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tickets",
+						"{{ticketId}}",
+						"status"
+					]
+				},
+				"description": "Generated from cURL: curl -X PATCH http://localhost:8080/api/v1/tickets/{ticketId}/status \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\"status\":\"newStatus\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Add Comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"authorId\" : \"Author\",\r\n    \"content\": \"Checked again and same issue\",\r\n    \"visibility\" : \"PUBLIC\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/tickets/{{ticketId}}/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"tickets",
+						"{{ticketId}}",
+						"comments"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/v1/tickets/tickets/{ticketId}/comments \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -d '{\"comment\":\"Your comment\"}'"
+			},
+			"response": []
+		}
+	]
+}
