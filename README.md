@@ -83,4 +83,10 @@ project are:
 
 For development of this project, GitHub Copilot was used to assist in writing code and generating documentation.
 
+### Note
+- Although this wasn't part of the original requirements, fetching all tickets at once could easily become a performance bottleneck,
+especially as the number of tickets grows over time. For future improvements, it would be advisable to implement a paging mechanism
+or another strategy to avoid retrieving all tickets in a single request.
+
+- The logs are intentionally set to debug level to avoid cluttering the application logs, and they can always be enabled on demand via Actuator.
 
